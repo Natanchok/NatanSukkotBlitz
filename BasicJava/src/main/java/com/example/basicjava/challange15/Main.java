@@ -31,6 +31,7 @@ public class Main {
 
         employees.sort(Comparator.comparingDouble(Employee::calculatePay).reversed());
 
+
         for (int i = 0; i < employees.size(); i++) {
             Employee employee = employees.get(i);
             System.out.println(employee.getDetails());
