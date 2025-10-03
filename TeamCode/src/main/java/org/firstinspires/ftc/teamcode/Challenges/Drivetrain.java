@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Challenges;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -20,7 +19,8 @@ public class Drivetrain extends LinearOpMode {
     @Override
     public void runOpMode() {
         InitializeDrivetrain();
-        telemetry.addData("Robot is initialized", "did init ");
+        telemetry.addLine("drivetrain is initialized");
+        waitForStart();
          while (opModeIsActive()){
              strafe = gamepad1.left_stick_x;
              forward = -gamepad1.left_stick_y;
