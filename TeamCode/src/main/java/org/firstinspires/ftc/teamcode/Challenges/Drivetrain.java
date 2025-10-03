@@ -13,8 +13,8 @@ public class Drivetrain extends LinearOpMode {
     double strafe, forward, turn;
 
     final RevHubOrientationOnRobot revHubOrientation = new RevHubOrientationOnRobot(
-            RevHubOrientationOnRobot.LogoFacingDirection.UP,
-            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
+            RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+            RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD);
 
     @Override
     public void runOpMode() {
