@@ -40,5 +40,6 @@ public class MotorTriggerOperation extends LinearOpMode {
             telemetry.addData("Motor Power", power);
             telemetry.update();
         }
+
     }
 }
