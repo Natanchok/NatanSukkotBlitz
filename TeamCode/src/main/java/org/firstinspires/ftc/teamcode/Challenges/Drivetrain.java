@@ -11,6 +11,9 @@ import com.qualcomm.robotcore.hardware.IMU;
 public class Drivetrain extends LinearOpMode {
     DcMotor LF, RF, LB, RB;
     double strafe, forward, turn;
+    boolean slowModeEnabled = false;
+    boolean previousBState = false;
+
 
     final RevHubOrientationOnRobot revHubOrientation = new RevHubOrientationOnRobot(
             RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
@@ -68,9 +71,29 @@ public class Drivetrain extends LinearOpMode {
         maxPower = Math.max(maxPower, Math.abs(rFPower));
         maxPower = Math.max(maxPower, Math.abs(rBPower));
 
-        LF.setPower(maxSpeed * (lFPower / maxPower));
-        LB.setPower(maxSpeed * (lBPower / maxPower));
-        RF.setPower(maxSpeed * (rFPower / maxPower));
-        RB.setPower(maxSpeed * (rBPower / maxPower));
+
+        double slowMultiplier = slowMode();
+
+        LF.setPower(maxSpeed * (lFPower / maxPower) * slowMultiplier);
+        LB.setPower(maxSpeed * (lBPower / maxPower) * slowMultiplier);
+        RF.setPower(maxSpeed * (rFPower / maxPower) * slowMultiplier);
+        RB.setPower(maxSpeed * (rBPower / maxPower) * slowMultiplier);
     }
+
+    public double slowMode() {
+        double slow = 0.5;
+
+        // Toggle logic (runs only when B is first pressed)
+        if (gamepad1.b && !previousBState) {
+            slowModeEnabled = !slowModeEnabled;  // flip the state
+        }
+        previousBState = gamepad1.b;
+
+        // Show status on telemetry
+        telemetry.addData("Slow Mode", slowModeEnabled ? "ON" : "OFF");
+        telemetry.update();
+
+        return slowModeEnabled ? slow : 1.0;
+    }
+
 }
